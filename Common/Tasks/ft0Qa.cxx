@@ -270,7 +270,10 @@ struct ft0QaTask {
       tvx = triggers[o2::ft0::Triggers::bitVertex];
       cent = triggers[o2::ft0::Triggers::bitCen];
       semicent = triggers[o2::ft0::Triggers::bitSCen];
-
+      const bool min_bias = tvx && (semicent || cent);
+      if (!min_bias) {
+        return;
+      }
       // FT0 multiplicity calculation
       if (tvx) {
         histos.fill(HIST("hContribTVX"), nContrib);
